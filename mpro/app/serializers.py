@@ -1,6 +1,7 @@
+from django.db import models
 from django.db.models import fields
 from rest_framework import serializers
-from .models import AdminProfile, TeacherProfile, Dep
+from .models import AdminProfile, Attendencemodel, TeacherProfile, Dep,TecherMainProfile, StudentProfile, StudentEvulate,TeacherEvulate
 from django.contrib.auth import get_user_model
 from rest_framework.authtoken.models import Token
 
@@ -50,6 +51,30 @@ class DepSerializer(serializers.ModelSerializer):
     class Meta:
         model= Dep
         fields ='__all__'
-    
 
-    
+class TeacherProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TecherMainProfile
+        fields = '__all__'
+        depth= 1
+
+class StudentsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= StudentProfile
+        fields= '__all__'
+        depth= 1
+
+class Attendence(serializers.ModelSerializer):
+    class Meta:
+        model= Attendencemodel
+        fields= '__all__'
+        
+class SEserializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentEvulate
+        fields = '__all__'
+
+class TEserilizers(serializers.ModelSerializer):
+    class Meta:
+        model= TeacherEvulate
+        fields = '__all__'
