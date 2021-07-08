@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import fields
 from rest_framework import serializers
-from .models import AdminProfile, Attendencemodel, TeacherProfile, Dep,TecherMainProfile, StudentProfile, StudentEvulate,TeacherEvulate
+from .models import AdminProfile, Attendencemodel, StudentsMainProfile, TeacherProfile, Dep,TecherMainProfile, StudentProfile, StudentEvulate,TeacherEvulate
 from django.contrib.auth import get_user_model
 from rest_framework.authtoken.models import Token
 
@@ -78,3 +78,12 @@ class TEserilizers(serializers.ModelSerializer):
     class Meta:
         model= TeacherEvulate
         fields = '__all__'
+
+
+class StudentprofileSerialuzer(serializers.ModelSerializer):
+    class Meta:
+        model= StudentsMainProfile
+        fields = '__all__'
+        depth = 1
+
+        

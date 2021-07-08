@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
 from rest_framework.response import Response
-from .models import AdminProfile, Attendencemodel, TeacherEvulate, TeacherProfile, Dep,TecherMainProfile,StudentProfile,StudentEvulate
-from .serializers import  Attendence, ProfileSerializers, TEserilizers,TeacherAccountSerializer, DepSerializer,TeacherProfileSerializer,StudentsSerializer, SEserializer
+from .models import AdminProfile, Attendencemodel, StudentsMainProfile, TeacherEvulate, TeacherProfile, Dep,TecherMainProfile,StudentProfile,StudentEvulate
+from .serializers import  Attendence, ProfileSerializers, StudentprofileSerialuzer, TEserilizers,TeacherAccountSerializer, DepSerializer,TeacherProfileSerializer,StudentsSerializer, SEserializer
 from rest_framework import views, viewsets, generics, mixins
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -193,3 +193,32 @@ class teacherEvulateView(generics.GenericAPIView,mixins.ListModelMixin,mixins.Re
     
     def post(self, request):
         return self.create(request)
+
+
+
+class StudentProfileview(generics.GenericAPIView,mixins.ListModelMixin,mixins.RetrieveModelMixin,mixins.CreateModelMixin):
+    queryset = StudentsMainProfile.objects.all().order_by("-id")
+    serializer_class=StudentprofileSerialuzer
+    lookup_field = "pk"
+
+    def get(self,request,id=None):
+        if id:
+            return self.retrieve(request)
+        else:
+            return self.list(request)
+    
+    def post(self, request):
+        return self.create(request)
+
+            
+class StudentProfileview_Details(generics.GenericAPIView,mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin):
+     queryset = StudentsMainProfile.objects.all()
+     serializer_class=StudentprofileSerialuzer
+     lookup_field = "pk"
+
+     def get(self,request, *args, **kwargs):
+         return self.retrieve(request, *args, **kwargs)
+     def put(self,request, *args, **kwargs):
+         return self.update(request,*args, **kwargs)
+     def delete(self,request, *args, **kwargs):
+         return self.destroy(request,*args, **kwargs)

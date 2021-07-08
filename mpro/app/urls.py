@@ -15,7 +15,10 @@ urlpatterns = [
      path('attendence/', views.AttView.as_view()),
      path('attendence/<int:pk>', views.Att_detail.as_view()),
      path('students_evolution/', views.StudentEvulateView.as_view()),
-     path('teacher_evolution/', views.teacherEvulateView.as_view())
+     path('teacher_evolution/', views.teacherEvulateView.as_view()),
+     path('student_profile',views.StudentProfileview.as_view()),
+     path('student_profile/<int:pk>', views.StudentProfileview_Details.as_view())
+
 
 
 

@@ -60,6 +60,9 @@ class StudentsMainProfile(models.Model):
     image = image = models.ImageField(upload_to="profile/", blank=True, null=True)
     email = models.CharField(max_length=200, null=True, blank=True)
 
+    def __str__(self):
+        return self.username
+
 
 class Attendencemodel(models.Model):
     name = models.CharField(max_length=100, null=True, blank= True)
